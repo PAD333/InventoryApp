@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Inventory App</string>
+    <string name="unsaved_changes_dialog_msg">Do you want to discard your changes and quit editing?</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep Editing</string>
+    <string name="editor_activity_title_edit_product">Edit Product</string>
+    <string name="editor_activity_title_new_product">Add a Product</string>
+    <string name="editor_insert_product_failed">Error in saving the product</string>
+    <string name="editor_insert_product_successful">Product saved</string>
+    <string name="editor_update_product_failed">Error in updating the product</string>
+    <string name="editor_update_product_successful">Product updated</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+    <string name="delete_dialog_msg">Do you want to delete this product?</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="editor_delete_product_failed">Error in deleting the product</string>
+    <string name="editor_delete_product_successful">Product deleted</string>
+    <string name="unknown_description">Unknown description</string>
+    <string name="hint_product_quantity">Quantity</string>
+    <string name="category_quantity">Quantity</string>
+    <string name="hint_product_description">Description</string>
+    <string name="hint_product_name">Name</string>
+    <string name="category_overview">Overview</string>
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+    <string name="action_delete_all_entries">Delete All Products</string>
+    <string name="empty_view_title_text">These are not the products you\'re looking for</string>
+    <string name="empty_view_subtitle_text">Add a product</string>
+    <string name="plus_one">+</string>
+    <string name="minus_one">-</string>
+    <string name="order_more">Order more</string>
+    <string name="item_sale">Sale</string>
+    <string name="hint_product_price">Price</string>
+    <string name="category_price">Price</string>
+    <string name="currency_product_price">€</string>
+    <string name="button_select_image">Select Image</string>
+    <string name="toast_no_stock">Product out of stock</string>
+    <string name="toast_no_image">Please select an image</string>
+    <string name="toast_no_name">Please introduce a name</string>
+    <string name="toast_no_price">Please add a price</string>
+    <string name="toast_no_quantity">Please add a quantity</string>
+
+</resources>
