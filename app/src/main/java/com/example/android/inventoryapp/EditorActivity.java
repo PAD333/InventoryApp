@@ -31,8 +31,9 @@ import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.ProductContract.ProductEntry;
 
-import static android.R.attr.description;
-import static android.R.attr.name;
+import static com.example.android.inventoryapp.data.ProductContract.ANDROID_RESOURCE_URI;
+import static com.example.android.inventoryapp.data.ProductContract.CONTENT_AUTHORITY;
+import static com.example.android.inventoryapp.data.ProductContract.DRAWABLE_URI;
 import static com.example.android.inventoryapp.data.ProductContract.ProductEntry.PRODUCT_CONTACT;
 
 //Allows user to create a new product or edit an existing one.
@@ -207,7 +208,7 @@ public class EditorActivity extends AppCompatActivity implements
             mOrderButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String [] recipient = new String[1];
+                    String[] recipient = new String[1];
                     recipient[0] = PRODUCT_CONTACT;
                     Intent intent = new Intent(Intent.ACTION_SEND);
                     intent.setData(Uri.parse(MAILTO));
@@ -253,7 +254,7 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     // Get user input from editor and save product into database.
-    private void saveProduct() {
+    private boolean saveProduct() {
 
 
         // Read from input fields
@@ -270,18 +271,24 @@ public class EditorActivity extends AppCompatActivity implements
                 && TextUtils.isEmpty(priceString)
                 && mImageUri == null) {
             // Since no fields were modified:
-            return;
+            Toast.makeText(this, getString(R.string.toast_no_new_product), Toast.LENGTH_SHORT).show();
+            return true;
         }
 
+        // Validation:
         if (mImageUri == null) {
             Toast.makeText(this, getString(R.string.toast_no_image), Toast.LENGTH_SHORT).show();
+            return false;
         } else if (TextUtils.isEmpty(nameString)) {
             Toast.makeText(this, getString(R.string.toast_no_name), Toast.LENGTH_SHORT).show();
+            return false;
         } else if (TextUtils.isEmpty(priceString)) {
             Toast.makeText(this, getString(R.string.toast_no_price), Toast.LENGTH_SHORT).show();
-        }    else if (TextUtils.isEmpty(quantityString)) {
+            return false;
+        } else if (TextUtils.isEmpty(quantityString)) {
             Toast.makeText(this, getString(R.string.toast_no_quantity), Toast.LENGTH_SHORT).show();
-        }else {
+            return false;
+        } else { //All good to go:
             //ContentValues
             ContentValues values = new ContentValues();
             values.put(ProductEntry.COLUMN_PRODUCT_NAME, nameString);
@@ -316,7 +323,8 @@ public class EditorActivity extends AppCompatActivity implements
                             Toast.LENGTH_SHORT).show();
                 }
             }
-            finish();
+            //finish();
+            return true;
         }
     }
 
@@ -344,8 +352,9 @@ public class EditorActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             // Save product to database
             case R.id.action_save:
-                saveProduct();
-                finish();
+                if (saveProduct()) {
+                    finish();
+                }
                 return true;
             //Delete
             case R.id.action_delete:
@@ -452,7 +461,8 @@ public class EditorActivity extends AppCompatActivity implements
         mDescriptionEditText.setText("");
         mQuantityTextView.setText("");
         mPriceTextView.setText("");
-        mImageView.setImageBitmap(mImageBitmap);
+        Uri sample_path = Uri.parse(ANDROID_RESOURCE_URI + CONTENT_AUTHORITY + DRAWABLE_URI + "image_empty");
+        mImageView.setImageURI(sample_path);
     }
 
     //Warn the user there are unsaved changes that will be lost if they continue leaving the editor.

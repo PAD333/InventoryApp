@@ -39,5 +39,6 @@
     <string name="toast_no_name">Please introduce a name</string>
     <string name="toast_no_price">Please add a price</string>
     <string name="toast_no_quantity">Please add a quantity</string>
+    <string name="toast_no_new_product">No new product was created</string>
 
 </resources>
