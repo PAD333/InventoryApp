@@ -11,10 +11,8 @@ import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -153,22 +151,9 @@ public class EditorActivity extends AppCompatActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SELECT_PICTURE && resultCode == RESULT_OK) {
-            // Get image Uri
+            // Get image Uri and set it on the View
             mImageUri = data.getData();
-            // Get image file path
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-            // Create cursor object and query image
-            Cursor cursor = getContentResolver().query(mImageUri, filePathColumn, null, null, null);
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            // Get image path from cursor
-            String picturePath = cursor.getString(columnIndex);
-            cursor.close();
-            // Set the image to a Bitmap object
-            mImageBitmap = BitmapFactory.decodeFile(picturePath);
-            // Set Bitmap to the image view
-            mImageView.setImageBitmap(mImageBitmap);
+            mImageView.setImageURI(mImageUri);
         }
     }
     // endregion  meth
